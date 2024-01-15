@@ -1,0 +1,129 @@
+
+//+------------------------------------------------------------------+
+//|                                              Mini Nasdaq MT5.mq5 |
+//|                      Copyright 2022, Forex Robot Easy Team        |
+//|                                               forexroboteasy.com |
+//+------------------------------------------------------------------+
+#property strict
+#property version '1.00'
+#property description 'Mini Nasdaq MT5 Trading Robot'
+#property link 'forexroboteasy.com'
+
+// Global variables
+bool hammerCandle;
+double bullPower;
+double bearPower;
+double undisclosedMomentum;
+
+//+------------------------------------------------------------------+
+//| Expert initialization function                                   |
+//+------------------------------------------------------------------+
+int OnInit()
+{
+   // Initialize global variables
+   hammerCandle = false;
+   bullPower = 0.0;
+   bearPower = 0.0;
+   undisclosedMomentum = 0.0;
+   
+   return(INIT_SUCCEEDED);
+}
+
+//+------------------------------------------------------------------+
+//| Expert deinitialization function                                 |
+//+------------------------------------------------------------------+
+void OnDeinit(const int reason)
+{
+   // Perform any necessary cleanup here
+}
+
+//+------------------------------------------------------------------+
+//| Expert tick function                                             |
+//+------------------------------------------------------------------+
+void OnTick()
+{
+   // Check for Hammer candle pattern
+   if(IsHammerCandle())
+   {
+      hammerCandle = true;
+   }
+   else
+   {
+      hammerCandle = false;
+   }
+   
+   // Calculate Bulls Power and Bears Power indicators
+   bullPower = CalculateBullsPower();
+   bearPower = CalculateBearsPower();
+   
+   // Calculate undisclosed Momentum indicator
+   undisclosedMomentum = CalculateUndisclosedMomentum();
+   
+   // Perform necessary trading actions based on indicators
+   if(hammerCandle && bullPower > bearPower && undisclosedMomentum > 0)
+   {
+      OpenBuyOrder();
+   }
+   else if(!hammerCandle && bullPower < bearPower && undisclosedMomentum < 0)
+   {
+      OpenSellOrder();
+   }
+}
+
+//+------------------------------------------------------------------+
+//| Check for Hammer candle pattern                                  |
+//+------------------------------------------------------------------+
+bool IsHammerCandle()
+{
+   // Implement code to identify and analyze Hammer candle patterns
+   // Return true if Hammer candle pattern is detected, otherwise false
+   return false;
+}
+
+//+------------------------------------------------------------------+
+//| Calculate Bulls Power indicator                                  |
+//+------------------------------------------------------------------+
+double CalculateBullsPower()
+{
+   // Implement code to calculate Bulls Power indicator
+   // Return the calculated value
+   return 0.0;
+}
+
+//+------------------------------------------------------------------+
+//| Calculate Bears Power indicator                                  |
+//+------------------------------------------------------------------+
+double CalculateBearsPower()
+{
+   // Implement code to calculate Bears Power indicator
+   // Return the calculated value
+   return 0.0;
+}
+
+//+------------------------------------------------------------------+
+//| Calculate undisclosed Momentum indicator                        |
+//+------------------------------------------------------------------+
+double CalculateUndisclosedMomentum()
+{
+   // Implement code to calculate undisclosed Momentum indicator
+   // Return the calculated value
+   return 0.0;
+}
+
+//+------------------------------------------------------------------+
+//| Open buy order function                                          |
+//+------------------------------------------------------------------+
+void OpenBuyOrder()
+{
+   // Implement code to open a buy order
+   // Add necessary risk management features
+}
+
+//+------------------------------------------------------------------+
+//| Open sell order function                                         |
+//+------------------------------------------------------------------+
+void OpenSellOrder()
+{
+   // Implement code to open a sell order
+   // Add necessary risk management features
+}
